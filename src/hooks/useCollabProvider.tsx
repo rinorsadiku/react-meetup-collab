@@ -1,6 +1,7 @@
 import { TiptapCollabProvider } from "@hocuspocus/provider";
 import { useState } from "react";
 import { Doc as YDoc } from "yjs";
+import config from "../config/config";
 
 export const useCollabProvider = () => {
   const [provider, setProvider] = useState<TiptapCollabProvider | null>(null);
@@ -9,7 +10,7 @@ export const useCollabProvider = () => {
   const createProvider = (documentName: string) => {
     const provider = new TiptapCollabProvider({
       name: `user:${documentName}`,
-      appId: "your-app-id",
+      appId: config.collabAppId,
       document: yDoc,
     });
 

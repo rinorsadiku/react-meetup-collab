@@ -11,7 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@hocuspocus/provider": "^2.13.6",
     "@tiptap/extension-character-count": "^2.2.4",
+    "@tiptap/extension-collaboration": "^2.8.0",
     "@tiptap/extension-highlight": "^2.2.4",
     "@tiptap/extension-task-item": "^2.2.4",
     "@tiptap/extension-task-list": "^2.2.4",
@@ -20,7 +22,10 @@
     "clsx": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remixicon": "^4.2.0"
+    "remixicon": "^4.2.0",
+    "y-prosemirror": "^1.2.12",
+    "y-protocols": "^1.0.6",
+    "yjs": "^13.6.19"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

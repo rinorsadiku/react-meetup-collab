@@ -7,24 +7,32 @@ import StarterKit from "@tiptap/starter-kit";
 import { FC } from "react";
 import MenuBar from "./MenuBar";
 import styled from "@emotion/styled";
+import { TiptapCollabProvider } from "@hocuspocus/provider";
 
 interface TiptapEditorProps {
   className?: string;
+  provider: TiptapCollabProvider;
 }
 
-const TiptapEditor: FC<TiptapEditorProps> = ({ className }) => {
-  // TODO: Create custom hook for initializing the editor.
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure(),
-      Highlight,
-      TaskList,
-      TaskItem,
-      CharacterCount.configure({
-        limit: 10000,
-      }),
-    ],
-  });
+const TiptapEditor: FC<TiptapEditorProps> = ({ className, provider }) => {
+  const editor = useEditor(
+    {
+      extensions: [
+        StarterKit.configure(),
+        Highlight,
+        TaskList,
+        TaskItem,
+        CharacterCount.configure({
+          limit: 10000,
+        }),
+      ],
+    },
+    [provider]
+  );
+
+  if (!provider) {
+    return;
+  }
 
   return (
     <div className={className}>

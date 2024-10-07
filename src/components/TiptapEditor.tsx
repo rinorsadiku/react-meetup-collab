@@ -83,6 +83,12 @@ export default styled(TiptapEditor)`
       margin-top: 12px;
     }
 
+    p {
+      @media only screen and (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
     p.is-editor-empty:first-of-type::before {
       content: attr(data-placeholder);
       float: left;

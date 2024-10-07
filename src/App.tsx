@@ -4,7 +4,7 @@ import { globalStyling } from "./constants/global-styling";
 import { FC, useEffect } from "react";
 import TiptapEditor from "./components/TiptapEditor";
 import Header from "./components/Header";
-import UserDetails from "./components/UserDetails";
+import UserDetailsForm from "./components/UserDetailsForm";
 import { LocalStorageKeys } from "./types/LocalStorageKeys.enum";
 import { useCollabProvider } from "./hooks/useCollabProvider";
 
@@ -27,7 +27,7 @@ const App: FC<AppProps> = ({ className }) => {
       {!!provider ? (
         <TiptapEditor provider={provider} />
       ) : (
-        <UserDetails onSubmit={createProvider} />
+        <UserDetailsForm onSubmit={createProvider} />
       )}
 
       <Global styles={globalStyling} />
@@ -37,4 +37,8 @@ const App: FC<AppProps> = ({ className }) => {
 
 export default styled(App)`
   padding: 0 70px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;

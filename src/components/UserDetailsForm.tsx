@@ -3,12 +3,12 @@ import { FC, useCallback, useState } from "react";
 import { LocalStorageKeys } from "../types/LocalStorageKeys.enum";
 import clsx from "clsx";
 
-interface UserDetailsProps {
+interface UserDetailsFormProps {
   className?: string;
   onSubmit: () => void;
 }
 
-const UserDetails: FC<UserDetailsProps> = ({ className, onSubmit }) => {
+const UserDetailsForm: FC<UserDetailsFormProps> = ({ className, onSubmit }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
@@ -70,7 +70,7 @@ const UserDetails: FC<UserDetailsProps> = ({ className, onSubmit }) => {
   );
 };
 
-export default styled(UserDetails)`
+export default styled(UserDetailsForm)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,11 +105,12 @@ export default styled(UserDetails)`
 
     button {
       text-align: center;
+      background-color: #1456e4;
     }
   }
   button {
-    padding: 10px 15px;
     background-color: #0d0d0d;
+    padding: 10px 15px;
     color: #fff;
     border: none;
     border-radius: 4px;

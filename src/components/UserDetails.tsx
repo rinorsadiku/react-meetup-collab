@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 interface UserDetailsProps {
   className?: string;
-  onSubmit: (name: string) => void;
+  onSubmit: () => void;
 }
 
 const UserDetails: FC<UserDetailsProps> = ({ className, onSubmit }) => {
@@ -26,7 +26,7 @@ const UserDetails: FC<UserDetailsProps> = ({ className, onSubmit }) => {
     (overrideName?: string) => {
       const _name = overrideName || name;
       localStorage.setItem(LocalStorageKeys.USER, _name);
-      onSubmit(_name);
+      onSubmit();
     },
     [name, onSubmit]
   );

@@ -7,9 +7,9 @@ export const useCollabProvider = () => {
   const [provider, setProvider] = useState<TiptapCollabProvider | null>(null);
   const [yDoc] = useState(new YDoc());
 
-  const createProvider = (documentName: string) => {
+  const createProvider = () => {
     const provider = new TiptapCollabProvider({
-      name: `user:${documentName}`,
+      name: `react:meetup:collab:doc`,
       appId: config.collabAppId,
       document: yDoc,
     });

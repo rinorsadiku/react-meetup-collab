@@ -1,9 +1,9 @@
 export const collabColors = [
-  "#FF0000",
-  "#FFA500",
-  "#FFFF00",
-  "#008000",
-  "#0000FF",
-  "#4B0082",
-  "#EE82EE",
+  "#fb7185",
+  "#fdba74",
+  "#d9f99d",
+  "#a7f3d0",
+  "#a5f3fc",
+  "#a5b4fc",
+  "#f0abfc",
 ];

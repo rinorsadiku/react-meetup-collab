@@ -12,7 +12,7 @@ export const globalStyling = css`
       Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
       sans-serif !important;
 
-    background-color: gray;
+    /* background-color: gray; */
   }
 
   html,

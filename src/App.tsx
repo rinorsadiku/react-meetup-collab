@@ -17,9 +17,7 @@ const App: FC<AppProps> = ({ className }) => {
 
   useEffect(() => {
     const existingUser = localStorage.getItem(LocalStorageKeys.USER);
-    if (existingUser) {
-      createProvider(existingUser);
-    }
+    if (existingUser) createProvider();
   }, []);
 
   return (

@@ -1,21 +1,30 @@
 import { TiptapCollabProvider } from "@hocuspocus/provider";
-import { useState } from "react";
-import { Doc as YDoc } from "yjs";
+import * as Y from "yjs";
+import { useEffect, useState } from "react";
 import config from "../config/config";
+import { LocalStorageKeys } from "../types/LocalStorageKeys.enum";
 
 export const useCollabProvider = () => {
   const [provider, setProvider] = useState<TiptapCollabProvider | null>(null);
-  const [yDoc] = useState(new YDoc());
+  const [yDoc, setYDoc] = useState<Y.Doc | null>(null);
 
   const createProvider = () => {
+    const yDoc = new Y.Doc();
     const provider = new TiptapCollabProvider({
-      name: `react:meetup:collab:doc`,
+      name: "react-tiptap-collab",
       appId: config.collabAppId,
       document: yDoc,
+      token: "-",
     });
 
+    setYDoc(yDoc);
     setProvider(provider);
   };
 
-  return { provider, createProvider };
+  useEffect(() => {
+    const existingUser = localStorage.getItem(LocalStorageKeys.USER);
+    if (existingUser) createProvider();
+  }, []);
+
+  return { provider, createProvider, yDoc };
 };

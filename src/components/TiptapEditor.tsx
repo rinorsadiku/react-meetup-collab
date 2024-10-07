@@ -1,34 +1,20 @@
-import CharacterCount from "@tiptap/extension-character-count";
-import TaskItem from "@tiptap/extension-task-item";
-import TaskList from "@tiptap/extension-task-list";
-import Highlight from "@tiptap/extension-highlight";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { FC } from "react";
 import MenuBar from "./MenuBar";
 import styled from "@emotion/styled";
 import { TiptapCollabProvider } from "@hocuspocus/provider";
+import { useEditor } from "../hooks/useEditor";
+import { Doc } from "yjs";
+import { EditorContent } from "@tiptap/react";
+import EditorStatus from "./EditorStatus";
 
 interface TiptapEditorProps {
   className?: string;
   provider: TiptapCollabProvider;
+  yDoc: Doc;
 }
 
-const TiptapEditor: FC<TiptapEditorProps> = ({ className, provider }) => {
-  const editor = useEditor(
-    {
-      extensions: [
-        StarterKit.configure(),
-        Highlight,
-        TaskList,
-        TaskItem,
-        CharacterCount.configure({
-          limit: 10000,
-        }),
-      ],
-    },
-    [provider]
-  );
+const TiptapEditor: FC<TiptapEditorProps> = ({ className, provider, yDoc }) => {
+  const { editor } = useEditor({ provider, yDoc });
 
   if (!provider) {
     return;
@@ -36,23 +22,30 @@ const TiptapEditor: FC<TiptapEditorProps> = ({ className, provider }) => {
 
   return (
     <div className={className}>
-      {editor && <MenuBar editor={editor} />}
-      <EditorContent className="content" editor={editor} />
+      <div className="editor-container">
+        {editor && <MenuBar editor={editor} />}
+        <EditorContent className="content" editor={editor} />
+      </div>
+      <EditorStatus provider={provider} editor={editor} />
     </div>
   );
 };
 
 export default styled(TiptapEditor)`
-  background-color: #fff;
-  border: 3px solid #0d0d0d;
-  border-radius: 12px;
-  color: #000;
+  margin-top: 20px;
 
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  display: flex;
-  flex-direction: column;
+  .editor-container {
+    background-color: #fff;
+    border: 3px solid #0d0d0d;
+    border-radius: 12px;
+    color: #000;
+
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+  }
 
   .content {
     width: 100%;

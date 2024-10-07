@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 import { Global } from "@emotion/react";
 import { globalStyling } from "./constants/global-styling";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import TiptapEditor from "./components/TiptapEditor";
 import Header from "./components/Header";
 import UserDetailsForm from "./components/UserDetailsForm";
-import { LocalStorageKeys } from "./types/LocalStorageKeys.enum";
 import { useCollabProvider } from "./hooks/useCollabProvider";
 
 interface AppProps {
@@ -13,19 +12,14 @@ interface AppProps {
 }
 
 const App: FC<AppProps> = ({ className }) => {
-  const { provider, createProvider } = useCollabProvider();
-
-  useEffect(() => {
-    const existingUser = localStorage.getItem(LocalStorageKeys.USER);
-    if (existingUser) createProvider();
-  }, []);
+  const { provider, createProvider, yDoc } = useCollabProvider();
 
   return (
     <div className={className}>
       <Header />
 
-      {!!provider ? (
-        <TiptapEditor provider={provider} />
+      {!!provider && !!yDoc ? (
+        <TiptapEditor provider={provider} yDoc={yDoc} />
       ) : (
         <UserDetailsForm onSubmit={createProvider} />
       )}

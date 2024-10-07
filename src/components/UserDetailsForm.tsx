@@ -76,6 +76,8 @@ export default styled(UserDetailsForm)`
   align-items: center;
   gap: 10px;
 
+  margin-top: 20px;
+
   .form-wrapper {
     width: 400px;
     border: 3px solid #0d0d0d;

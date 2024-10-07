@@ -26,7 +26,7 @@ const TiptapEditor: FC<TiptapEditorProps> = ({ className, provider, yDoc }) => {
         {editor && <MenuBar editor={editor} />}
         <EditorContent className="content" editor={editor} />
       </div>
-      <EditorStatus provider={provider} editor={editor} />
+      {editor && <EditorStatus provider={provider} editor={editor} />}
     </div>
   );
 };

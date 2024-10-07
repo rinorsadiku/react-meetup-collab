@@ -46,7 +46,7 @@ const UserDetailsForm: FC<UserDetailsFormProps> = ({ className, onSubmit }) => {
     const name = `Guest #${randomId}`;
 
     setStorageAndSubmit(name);
-  }, []);
+  }, [setStorageAndSubmit]);
 
   return (
     <div className={className}>

@@ -1,10 +1,33 @@
 import { TiptapCollabProvider, WebSocketStatus } from "@hocuspocus/provider";
+import { Editor, useEditorState } from "@tiptap/react";
 import { useEffect, useState } from "react";
 
-export const useCollabState = (provider: TiptapCollabProvider) => {
+interface UseCollabStateProps {
+  provider: TiptapCollabProvider;
+  editor: Editor;
+}
+
+export const useCollabState = ({ provider, editor }: UseCollabStateProps) => {
   const [collabState, setCollabState] = useState<WebSocketStatus>(
     provider ? WebSocketStatus.Connecting : WebSocketStatus.Disconnected
   );
+
+  const users = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      const collabUsers = editor?.storage?.collaborationCursor?.users || [];
+
+      return collabUsers.map((user: any) => {
+        const names = user.name?.split(" ") || [];
+        const initials = names
+          .map((n: string) => n[0] || "?")
+          .join("")
+          .toUpperCase();
+
+        return { ...user, initials: initials || "?" };
+      });
+    },
+  });
 
   useEffect(() => {
     const statusHandler = (event: { status: WebSocketStatus }) => {
@@ -18,5 +41,5 @@ export const useCollabState = (provider: TiptapCollabProvider) => {
     };
   }, [provider]);
 
-  return { collabState };
+  return { collabState, users };
 };

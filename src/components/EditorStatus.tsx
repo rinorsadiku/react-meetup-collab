@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useCollabState } from "../hooks/useCollabState";
 import { TiptapCollabProvider } from "@hocuspocus/provider";
-import { Editor, useEditorState } from "@tiptap/react";
+import { Editor } from "@tiptap/react";
 import styled from "@emotion/styled";
 import { capitalize } from "../utils";
 
@@ -16,25 +16,7 @@ const EditorStatus: FC<EditorStatusProps> = ({
   editor,
   className,
 }) => {
-  const { collabState } = useCollabState(provider);
-
-  const users = useEditorState({
-    editor,
-    selector: (ctx): (any & { initials: string })[] => {
-      if (!ctx.editor?.storage.collaborationCursor?.users) {
-        return [];
-      }
-
-      return ctx.editor.storage.collaborationCursor.users.map((user: any) => {
-        const names = user.name?.split(" ");
-        const firstName = names?.[0];
-        const lastName = names?.[names.length - 1];
-        const initials = `${firstName?.[0] || "?"}${lastName?.[0] || "?"}`;
-
-        return { ...user, initials: initials.length ? initials : "?" };
-      });
-    },
-  });
+  const { collabState, users } = useCollabState({ provider, editor });
 
   return (
     <div className={className}>
@@ -71,7 +53,7 @@ export default styled(EditorStatus)`
       color: #4cd964;
     }
 
-    &--disconnecting {
+    &--disconnected {
       color: #ff3b30;
     }
   }

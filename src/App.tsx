@@ -18,7 +18,7 @@ const App: FC<AppProps> = ({ className }) => {
     <div className={className}>
       <Header />
 
-      {!!provider && !!yDoc ? (
+      {provider && yDoc ? (
         <TiptapEditor provider={provider} yDoc={yDoc} />
       ) : (
         <UserDetailsForm onSubmit={createProvider} />

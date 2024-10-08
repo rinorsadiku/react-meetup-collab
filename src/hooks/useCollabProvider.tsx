@@ -11,7 +11,7 @@ export const useCollabProvider = () => {
   const createProvider = () => {
     const yDoc = new Y.Doc();
     const provider = new TiptapCollabProvider({
-      name: "react-tiptap-collab",
+      name: `react-tiptap-collab-${config.env}`,
       appId: config.collabAppId,
       document: yDoc,
       token: "-",

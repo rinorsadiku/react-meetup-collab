@@ -32,7 +32,7 @@ This is a small React application demonstrating how to set up real-time collabor
 2. **Navigate to the project directory:**
 
    ```bash
-   cd react-tiptap-collab
+   cd react-meetup-collab
    ```
 
 3. **Install dependencies:**
